@@ -19,6 +19,6 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 # clean up
 RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# set java security
+# secured SecureRandom
 RUN sed -e 's%^\(securerandom.source\)=.*%\1=file:/dev/./urandom%' \
         -i $JAVA_HOME/jre/lib/security/java.security
