@@ -5,7 +5,7 @@ ENV HOME /root
 
 RUN mkdir /build
 
-ADD build /build
+ADD ./build /build
 
 RUN /build/install.sh
 
