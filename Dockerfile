@@ -1,16 +1,10 @@
 FROM ubuntu:14.10
 MAINTAINER Binh Nguyen "binhnguyen@anduintransact.com"
 
-# avoid interactive dialouges from apt:
+# avoid interactive dialoges from apt:
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
-
-# add repos and update:
-RUN add-apt-repository ppa:webupd8team/java; apt-get update; apt-get -y dist-upgrade
-
-# install java8:
-RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections; apt-get -y install oracle-java8-installer
 
 RUN apt-get update && apt-get install -yq \
     make \
@@ -26,9 +20,15 @@ RUN apt-get update && apt-get install -yq \
     python-software-properties \
     python-pip \
     curl \
-    oracle-java8-set-default \
     supervisor \
     --no-install-recommends
+
+# add repos and update:
+RUN add-apt-repository ppa:webupd8team/java; apt-get update; apt-get -y dist-upgrade
+
+# install java8:
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections; apt-get -y install oracle-java8-installer oracle-java8-set-default --no-install-recommends
+
 
 # install etcd
 RUN mkdir /tmp/etcd
