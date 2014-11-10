@@ -5,7 +5,7 @@ MAINTAINER Binh Nguyen "binhnguyen@anduintransact.com"
 ENV DEBIAN_FRONTEND noninteractive
 
 # add repos and update:
-RUN add-apt-repository ppa:webupd8team/java; apt-get update;
+RUN add-apt-repository ppa:webupd8team/java; apt-get update; apt-get -y dist-upgrade
 
 RUN sed 's/main$/main universe/' -i /etc/apt/sources.list
 
